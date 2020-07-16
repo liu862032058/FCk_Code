@@ -29,6 +29,7 @@ public class GeoServiceImpl implements GeoService {
         GeoOperations<String, String> ops = redisTemplate.opsForGeo();
  
         Set<RedisGeoCommands.GeoLocation<String>> locations = new HashSet<>();
+
         cityInfos.forEach(ci -> locations.add(new RedisGeoCommands.GeoLocation<String>(
                 ci.getCity(), new Point(ci.getLongitude(), ci.getLatitude())
         )));
@@ -52,7 +53,8 @@ public class GeoServiceImpl implements GeoService {
     public Distance getTwoCityDistance(String city1, String city2, Metric metric) {
  
         GeoOperations<String, String> ops = redisTemplate.opsForGeo();
- 
+//        ops.
+
         return metric == null ?
                 ops.distance(GEO_KEY, city1, city2) : ops.distance(GEO_KEY, city1, city2, metric);
     }
